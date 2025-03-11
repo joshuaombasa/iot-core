@@ -2,6 +2,7 @@ import RPi.GPIO as GPIO
 import time
 import logging
 import requests
+import atexit
 
 # Configure logging for production use
 logging.basicConfig(filename='/var/log/vibration_monitor.log', level=logging.INFO,
@@ -39,10 +40,7 @@ def monitor_vibrations():
     except KeyboardInterrupt:
         logging.info("Vibration monitoring stopped by user.")
         print("\nStopping vibration monitoring.")
-        GPIO.cleanup()
-    except Exception as e:
-        logging.error(f"Unexpected error: {e}")
-        GPIO.cleanup()
 
-if __name__ == "__main__":
-    monitor_vibrations()
+def cleanup():
+    """Cleanup GPIO on exit."""
+    logging.inf
